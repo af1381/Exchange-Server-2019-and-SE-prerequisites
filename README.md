@@ -78,7 +78,7 @@ Setup.exe /PrepareSchema /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
 ```
 2. Prepare Active Directory and set the organization name:
 ```cmd
-Setup.exe /PrepareAD /OrganizationName:TrendParand /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+Setup.exe /PrepareAD /OrganizationName:(your-Organization) /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
 ```
 3. Prepare the current domain:
 ```cmd
