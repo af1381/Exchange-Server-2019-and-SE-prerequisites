@@ -74,15 +74,15 @@ Install-WindowsFeature ADLDS
 
 1. Prepare the Active Directory schema (run once per forest):
 ```cmd
-Setup.exe /PrepareSchema /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+./Setup.exe /PrepareSchema /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
 ```
 2. Prepare Active Directory and set the organization name:
 ```cmd
-Setup.exe /PrepareAD /OrganizationName:(your-Organization) /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+./Setup.exe /PrepareAD /OrganizationName:(your-Organization) /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
 ```
 3. Prepare the current domain:
 ```cmd
-Setup.exe /PrepareDomain /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+./Setup.exe /PrepareDomain /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
 ```
 
 ### 📌 Notes
