@@ -92,3 +92,11 @@ Install-WindowsFeature ADLDS
 - In a multi-domain environment, run `/PrepareDomain` for each domain 🌐.
 
 ✅ Once completed, your Active Directory environment is ready for Exchange Server 🎉.
+
+### 🛠 Additional Required Software
+You must also install the following software:
+1. rewrite_amd64_en-US
+2. .NET-4.8
+3. UcmaRuntimeSetup
+4. Visual_C++_2013
+5. Visual_C++_2012
