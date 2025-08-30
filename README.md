@@ -62,3 +62,26 @@ Install-WindowsFeature Server-Media-Foundation, NET-Framework-45-Core, NET-Frame
 **Install Windows features:**
 ```powershell
 Install-WindowsFeature ADLDS
+
+⚠️ Important Notes:
+- These commands must be run by a user with Domain Admin and Schema Admin privileges.
+- Always back up Active Directory before running these commands.
+- These steps must be completed BEFORE installing Exchange Server.
+
+🔹 Required Commands:
+
+1. Prepare the Active Directory schema (run once per forest):
+   Setup.exe /PrepareSchema /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+
+2. Prepare Active Directory and set the organization name:
+   Setup.exe /PrepareAD /OrganizationName:TrendParand /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+
+3. Prepare the current domain:
+   Setup.exe /PrepareDomain /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+
+📌 Notes:
+- Run these commands from the directory containing Setup.exe.
+- After successful execution, you can proceed with the main Exchange installation.
+- In a multi-domain environment, run /PrepareDomain for each domain.
+
+✅ Once completed, your Active Directory environment is ready for Exchange Server.
