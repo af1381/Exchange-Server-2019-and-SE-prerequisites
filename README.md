@@ -1,72 +1,94 @@
-<div dir="rtl" align="right">
+# ⚡ Exchange Server 2019 & SE Prerequisites
 
-# راهنمای ورود به ایمیل سازمانی و اضافه کردن تقویم (Exchange Server 2019 / OWA)
+This README includes the system prerequisites for installing Exchange Server 2019 and Subscription Edition (SE), including both Mailbox 📬 and Edge Transport 🚀 roles, as well as management tools 🛠️ for client machines.
 
-این راهنما برای کاربران سازمان تهیه شده تا:
-- وارد Outlook Web App (OWA) شوند
-- تقویم (Calendar) همکاران/اتاق‌های جلسه را از Directory اضافه کنند
+## 📝 Pre-Installation Notes
 
----
+- **Active Directory**: Ensure your AD is compatible with Exchange 2019 and SE.
+- **Supported Operating Systems**: Use a supported Windows Server version.
+- **Windows Updates**: Make sure all updates are installed.
+- **Remote Registry Service**: Must be set to `Automatic` and not disabled.
 
-## پیش‌نیازها
-- آدرس وب‌میل: `https://email.hesaba.net`  
-  (آدرس دقیق را از واحد IT دریافت کنید)
-- نام کاربری و رمز عبور سازمانی
+## 🖥️ Windows Server Prerequisites for Exchange Server
 
+### Prepare Active Directory
 
-> - `DOMAIN\username`
-> - `username`
-> - `username@hesaba.net`
+**Required software:**
+- Supported version of .NET Framework 💻
+- Visual C++ Redistributable for Visual Studio 2012 🧩
 
----
+**Install RSAT tools:**
+```powershell
+Install-WindowsFeature RSAT-ADDS
+```
 
-## ۱) ورود به صفحه وب
-1) مرورگر را باز کنید و آدرس وب‌میل را وارد کنید.  
-2) در صفحه ورود، **نام کاربری** و **رمز عبور** خود را وارد کنید و روی **Sign in** بزنید.
-3) پسوورد پیش فرص تمامی کاربران Hesaba12345 می باشد که پس از ورود می بایست آن را اغییر دهند.
+### Exchange Management Tools
 
-<img src="images/1.png" alt="OWA Login" width="900">
+**Required software:**
+- Supported .NET Framework 💻
+- Visual C++ Redistributable for Visual Studio 2012 🧩
 
----
+**Install Windows features:**
+- Server OS:
+```powershell
+Install-WindowsFeature -Name Web-Mgmt-Console, Web-Metabase
+```
+- Client OS:
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementConsole, IIS-Metabase -All
+```
 
-## ۲) تغییر رمز عبور (در صورت نمایش)
-اگر پیام تغییر رمز عبور نمایش داده شد (به‌دلیل Expired شدن رمز):
-1) **DOMAIN\username** : به این صورت وارد حتما باید وارد شود مثال hesaba.net\hesaba
-2) **توجه کنید که پسوورد خود را حتما باید به صورت Complix وارد کنید**
-3) **Current password**: رمز فعلی  
-4) **New password**: رمز جدید  
-5) **Confirm new password**: تکرار رمز جدید  
-6) روی **Submit** کلیک کنید.
+### Mailbox Role 📬
 
-<img src="images/2.png" alt="Change Password" width="900">
+**Required software:**
+- Supported .NET Framework 💻
+- Visual C++ Redistributable for Visual Studio 2012 & 2013 🧩
 
+**Install Windows features:**
+```powershell
+Install-WindowsFeature Server-Media-Foundation, NET-Framework-45-Core, NET-Framework-45-ASPNET, NET-WCF-HTTP-Activation45, NET-WCF-Pipe-Activation45, NET-WCF-TCP-Activation45, NET-WCF-TCP-PortSharing45, RPC-over-HTTP-proxy, RSAT-Clustering, RSAT-Clustering-CmdInterface, RSAT-Clustering-Mgmt, RSAT-Clustering-PowerShell, WAS-Process-Model, Web-Asp-Net45, Web-Basic-Auth, Web-Client-Auth, Web-Digest-Auth, Web-Dir-Browsing, Web-Dyn-Compression, Web-Http-Errors, Web-Http-Logging, Web-Http-Redirect, Web-Http-Tracing, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Metabase, Web-Mgmt-Console, Web-Mgmt-Service, Web-Net-Ext45, Web-Request-Monitor, Web-Server, Web-Stat-Compression, Web-Static-Content, Web-Windows-Auth, Web-WMI, Windows-Identity-Foundation, RSAT-ADDS
+```
+- For Server Core:
+```powershell
+Install-WindowsFeature Server-Media-Foundation, NET-Framework-45-Core, NET-Framework-45-ASPNET, NET-WCF-HTTP-Activation45, NET-WCF-Pipe-Activation45, NET-WCF-TCP-Activation45, NET-WCF-TCP-PortSharing45, RPC-over-HTTP-proxy, RSAT-Clustering, RSAT-Clustering-CmdInterface, RSAT-Clustering-PowerShell, WAS-Process-Model, Web-Asp-Net45, Web-Basic-Auth, Web-Client-Auth, Web-Digest-Auth, Web-Dir-Browsing, Web-Dyn-Compression, Web-Http-Errors, Web-Http-Logging, Web-Http-Redirect, Web-Http-Tracing, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Metabase, Web-Mgmt-Service, Web-Net-Ext45, Web-Request-Monitor, Web-Server, Web-Stat-Compression, Web-Static-Content, Web-Windows-Auth, Web-WMI, RSAT-ADDS
+```
 
+### Edge Transport Role 🚀
 
----
+**Required software:**
+- Supported .NET Framework 💻
+- Visual C++ Redistributable for Visual Studio 2012 🧩
 
-## ۳) رفتن به بخش Calendar
-بعد از ورود، از منوی سمت چپ، گزینه **Calendar** را انتخاب کنید.
+**Install Windows features:**
+```powershell
+Install-WindowsFeature ADLDS
+```
 
-<img src="images/3.png" alt="Open Calendar App" width="900">
+## ⚠️ Important Notes
 
----
+- These commands must be run by a user with **Domain Admin** and **Schema Admin** privileges 🛡️.
+- Always back up Active Directory before running these commands 💾.
+- These steps must be completed **before installing Exchange Server** ⏳.
 
-## ۴) اضافه کردن تقویم همکار یا اتاق جلسه (From directory)
-1) داخل Calendar، از نوار بالا روی **Add calendar** کلیک کنید.  
-2) گزینه **From directory** را انتخاب کنید.
+### 🔹 Required Commands
 
-<img src="images/4.png" alt="Add calendar from directory" width="900">
+1. Prepare the Active Directory schema (run once per forest):
+```cmd
+Setup.exe /PrepareSchema /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+```
+2. Prepare Active Directory and set the organization name:
+```cmd
+Setup.exe /PrepareAD /OrganizationName:(your-Organization) /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+```
+3. Prepare the current domain:
+```cmd
+Setup.exe /PrepareDomain /IAcceptExchangeServerLicenseTerms_DiagnosticDataOFF
+```
 
-3) در پنجره بازشده، نام همکار/اتاق جلسه را تایپ کنید.  
-4) از لیست پیشنهادی، مورد صحیح را انتخاب کنید تا تقویم اضافه شود.
+### 📌 Notes
 
-<img src="images/5.png" alt="Search calendar in directory" width="900">
+- Run these commands from the directory containing `Setup.exe` 🗂️.
+- After successful execution, you can proceed with the main Exchange installation 🚀.
+- In a multi-domain environment, run `/PrepareDomain` for each domain 🌐.
 
-> بعد از اضافه شدن، تقویم معمولاً در بخش **Other calendars** نمایش داده می‌شود.
-
----
-
-
-
-
-
+✅ Once completed, your Active Directory environment is ready for Exchange Server 🎉.
