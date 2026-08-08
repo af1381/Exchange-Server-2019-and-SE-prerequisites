@@ -80,9 +80,9 @@ Install-WindowsFeature Server-Media-Foundation, RSAT-ADDS, RSAT-ADDS-Tools, RSAT
 
 | Record Type  | Name / Host                   | Points to                  |
 |--------------|-------------------------------|----------------------------|
-| A            | autodiscover.hesaba.net        | IP Exchange Server          |
-| A            | email.hesaba.net               | IP Exchange Server          |
-| A            | admin.email.hesaba.net         | IP Exchange Server          |
+| A            | autodiscover.hsb.net        | IP Exchange Server          |
+| A            | email.hsb.net               | IP Exchange Server          |
+| A            | admin.email.hsb.net         | IP Exchange Server          |
 
 ---
 
