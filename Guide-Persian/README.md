@@ -101,7 +101,7 @@ Get-User -OrganizationalUnit $OU | Where-Object {$_.RecipientType -eq "User"} | 
 
 ### گواهی Self-Signed
 ```powershell
-New-ExchangeCertificate -FriendlyName "HesabaCert" -DomainName email.hesaba.net,admin.email.hesaba.net,autodiscover.hesaba.net -Services IIS
+New-ExchangeCertificate -FriendlyName "hsbCert" -DomainName email.hsb.net,admin.email.hsb.net,autodiscover.hsb.net -Services IIS
 Enable-ExchangeCertificate -Thumbprint <Thumbprint> -Services IIS
 iisreset
 ```
@@ -120,8 +120,8 @@ iisreset
 
 ## 🚀 URLهای سفارشی
 
-- Webmail: `https://email.hesaba.net`
-- Admin Panel: `https://admin.email.hesaba.net`
+- Webmail: `https://email.hsb.net`
+- Admin Panel: `https://admin.email.hsb.net`
 
 برای حذف `/owa` و `/ecp` از **IIS ARR** یا **Nginx** استفاده کنید.
 
@@ -130,7 +130,7 @@ iisreset
 ## 🧪 تست دسترسی
 
 ```powershell
-Test-NetConnection email.hesaba.net -Port 443
+Test-NetConnection email.hsb.net -Port 443
 ```
 
 ---
