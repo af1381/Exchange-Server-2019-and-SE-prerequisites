@@ -143,14 +143,14 @@ Set-ADUser jdoe -PasswordNeverExpires $true -ChangePasswordAtLogon $false
 
 ## Per-OU Strategy with FGPP (Optional)
 
-PSOs don’t link to OUs; apply them to **groups**. Example for OU **HesabaUsers** (set to 180 days or unlimited by PSO).
+PSOs don’t link to OUs; apply them to **groups**. Example for OU **hsbUsers** (set to 180 days or unlimited by PSO).
 
 ```powershell
 Import-Module ActiveDirectory
 
-$OuName    = "HesabaUsers"
-$GroupName = "GG-HesabaUsers-Policy"
-$PsoName   = "PSO-HesabaUsers"
+$OuName    = "hsbUsers"
+$GroupName = "GG-hsbUsers-Policy"
+$PsoName   = "PSO-hsbUsers"
 
 # Find OU DN
 $ou = Get-ADOrganizationalUnit -LDAPFilter "(name=$OuName)"
@@ -201,7 +201,7 @@ Add-ADFineGrainedPasswordPolicySubject -Identity $PsoName -Subjects $GroupName -
 1) **Force change at next logon** for all enabled users in OU (keep default passwords from lingering):
 ```powershell
 Import-Module ActiveDirectory
-$SearchBase = "OU=HesabaUsers,DC=hesaba,DC=net"
+$SearchBase = "OU=hsbUsers,DC=hsb,DC=net"
 
 Get-ADUser -Filter * -SearchBase $SearchBase -SearchScope Subtree -Properties Enabled |
   Where-Object { $_.Enabled -eq $true } |
@@ -214,7 +214,7 @@ Get-ADUser -Filter * -SearchBase $SearchBase -SearchScope Subtree -Properties En
 2) **After** users change their password (pwdLastSet ≠ 0), make them **never expire**:
 ```powershell
 Import-Module ActiveDirectory
-$SearchBase = "OU=HesabaUsers,DC=hesaba,DC=net"
+$SearchBase = "OU=hsbUsers,DC=hsb,DC=net"
 
 Get-ADUser -Filter * -SearchBase $SearchBase -SearchScope Subtree -Properties pwdLastSet, PasswordNeverExpires |
   Where-Object { $_.pwdLastSet -ne 0 -and $_.PasswordNeverExpires -ne $true } |
