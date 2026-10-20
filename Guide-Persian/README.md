@@ -89,7 +89,7 @@ Install-WindowsFeature Server-Media-Foundation, RSAT-ADDS, RSAT-ADDS-Tools, RSAT
 ## 📦 فعال‌سازی Mailbox برای کاربران OU
 
 ```powershell
-$OU = "OU=Users,DC=hesaba,DC=net"
+$OU = "OU=Users,DC=hsb,DC=net"
 Get-User -OrganizationalUnit $OU | Where-Object {$_.RecipientType -eq "User"} | Enable-Mailbox -Database "Mailbox Database 0450261961"
 ```
 
